@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import EditUser from './editUser';
+import Registration from './register';
+import UsersList from './usersList';
+import { Row, Col } from 'antd';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Row>
+        <Col span={16} offset={4}>
+          <Switch>
+            <Route exact path="/" component={UsersList} />
+            <Route path="/register" component={Registration} />
+            <Route path="/edit/:userId" component={EditUser} />
+            <Route exact path="**" component={UsersList} />
+          </Switch>
+        </Col>
+      </Row>
+    </Router>
   );
 }
 
